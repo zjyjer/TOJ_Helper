@@ -43,7 +43,7 @@ def main():
             if item.startswith('p'):
                 problem_status = item.split(',')
                 if problem_status[1] == '2':
-                    to_solve.append([problem_status[2], problem_status[3]])
+                    to_solve.append([problem_status[2], problem_status[3].replace('\\','').strip('"')])
 
     if len(to_solve) > 0:
         print ("Problem submitted but not solved:")
