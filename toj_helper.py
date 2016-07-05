@@ -7,6 +7,7 @@ users should input id and password at first.
 import getpass
 import urllib.parse
 import urllib.request
+import csv
 
 def main():
     user_id = input("Please input your id: ")
@@ -18,6 +19,7 @@ def main():
         "login" : "Login"
     }).encode('utf-8')
     url_prefix = "http://acm.tju.edu.cn/toj/list.php?vol="
+    output_file_name = "toj_unsolved.csv"
 
     request = urllib.request.Request("http://acm.tju.edu.cn/toj/problem.html")
     problem = urllib.request.urlopen(request).read().decode('utf-8').split('\n')
@@ -46,10 +48,14 @@ def main():
                     to_solve.append([problem_status[2], problem_status[3].replace('\\','').strip('"')])
 
     if len(to_solve) > 0:
-        print ("Problem submitted but not solved:")
-        print ('\n'.join( map(str, to_solve)))
+        with open(output_file_name, 'w', newline = '') as output:
+            spamwriter = csv.writer(output, delimiter = ',', quotechar = '"', quoting = csv.QUOTE_MINIMAL)
+            spamwriter.writerow(['Problem ID', 'Title']) # header
+            for item in to_solve[0:len(to_solve):2]:
+                spamwriter.writerow(item)
+        print ("Total", len(to_solve), "problems matched, result saved into", output_file_name)
     else:
-        print ("You don\'t have any problem not solved.")
+        print ("You don't have any problem not solved.")
 
 if __name__ == '__main__':
     main()
