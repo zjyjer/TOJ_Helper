@@ -54,7 +54,7 @@ def main(*argv):
 if __name__ == '__main__':
     res = {}
     if len(sys.argv) < 3:
-        res = main(u'3013216027', u'6013308567')
+        print('Usage:\n\tpython %s <user id1> <user id2>\n')
     else:
         res = main(sys.argv[1], sys.argv[2])
     save_to_file(res)
