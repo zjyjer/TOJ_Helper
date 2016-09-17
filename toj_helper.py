@@ -51,7 +51,7 @@ def main():
         with open(output_file_name, 'w', newline = '') as output:
             spamwriter = csv.writer(output, delimiter = ',', quotechar = '"', quoting = csv.QUOTE_MINIMAL)
             spamwriter.writerow(['Problem ID', 'Title']) # header
-            for item in to_solve[0:len(to_solve):2]:
+            for item in to_solve[0:len(to_solve)]:
                 spamwriter.writerow(item)
         print ("Total", len(to_solve), "problems matched, result saved into", output_file_name)
     else:
