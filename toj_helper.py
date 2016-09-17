@@ -47,11 +47,12 @@ def main():
                 if problem_status[1] == '2':
                     to_solve.append([problem_status[2], problem_status[3].replace('\\','').strip('"')])
 
+    print('result:', to_solve)
     if len(to_solve) > 0:
         with open(output_file_name, 'w', newline = '') as output:
             spamwriter = csv.writer(output, delimiter = ',', quotechar = '"', quoting = csv.QUOTE_MINIMAL)
             spamwriter.writerow(['Problem ID', 'Title']) # header
-            for item in to_solve[0:len(to_solve):2]:
+            for item in to_solve[0:len(to_solve)]:
                 spamwriter.writerow(item)
         print ("Total", len(to_solve), "problems matched, result saved into", output_file_name)
     else:
